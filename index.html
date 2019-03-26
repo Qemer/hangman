@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hangman</h1>
+    <h3>Words:<span id="words_id"></span></h3>
+    <script>
+        var words = ["apple", "orange", "lemon"]
+        var random="";
+        var word = document.getElementById("words_id")
+        var line_ = []
+        function guessWord() {
+            random = words[Math.floor(Math.random() * words.length)]
+            for (let i = 0; i < random.length; i++) {
+                line_.push("_")
+            }
+            word.innerHTML = line_.toString().split(",").join("");
+        }
+        guessWord();
+        window.onkeyup = function (event) {
+        
+            var w = event.keyCode
+            if ((w >= 65 && w <= 90) || (w >= 97 && w <= 122)) {
+                w = String.fromCharCode(event.keyCode).toLowerCase()
+            }
+            console.log("random: "+random+", line: "+line_);
+             
+            for(let i=0;i<random.length;i++){
+                if(random[i]==w){
+                    line_[i]=w
+                }
+            }
+            word.innerHTML = line_.toString().split(",").join("");
+        }
+    </script>
+</body>
+
+</html>
